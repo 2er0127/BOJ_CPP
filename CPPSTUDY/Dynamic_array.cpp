@@ -17,12 +17,12 @@ class dynamic_array { //클래스 템플릿
 public:
     dynamic_array(int n) { //배열의 크기를 인자로 받는 생성자
         this->n=n;
-        data=new T(n);
+        data=new T[n];
     }
     
     dynamic_array(const dynamic_array<T>& other) { //복사 생성자
         n=other.n;
-        data=new T(n);
+        data=new T[n];
         
         for(int i=0; i<n; i++)
             data[i]=other[i];
