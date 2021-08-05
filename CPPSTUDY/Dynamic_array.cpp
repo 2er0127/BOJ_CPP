@@ -71,7 +71,7 @@ public:
         if(n==0)
             return "";
         
-        ostringstream os;
+        ostringstream os; //문자열 파싱 함수 ostringstream은 string을 조립하거나, 특정 수치를 문자열로 변환하기 위해 사용
         os<<data[0];
         
         for(int i=1; i<n; i++)
