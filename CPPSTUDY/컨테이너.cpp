@@ -15,6 +15,23 @@ public:
     
 private:
     node_ptr head;
+    
+public:
+    void push_front(int val) {
+        auto new_node=new node {val, NULL};
+        if(head!=NULL) {
+            new_node->next=head;
+            head=new_node;
+        }
+    }
+    
+    void pop_front() {
+        auto first=head;
+        if(head) {
+            head=head->next;
+            delete first;
+        }
+    }
 };
 
 int main() {
