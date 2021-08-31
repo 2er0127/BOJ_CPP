@@ -32,6 +32,19 @@ public:
             delete first;
         }
     }
+    
+    struct singly_ll_iterator {
+    private:
+        node_ptr ptr;
+        
+    public:
+        singly_ll_iterator(node_ptr p) : ptr(p) {}
+        
+        int& operator*() { return ptr->data;}
+        
+        node_ptr get() {return ptr;}
+        
+    }
 };
 
 int main() {
