@@ -44,8 +44,34 @@ public:
         
         node_ptr get() {return ptr;}
         
+        singly_ll_iterator& operator++() {
+            ptr=ptr->next;
+            return *this;
+        }
+        
+        singly_ll_iterator operator++(int) {
+            singly_ll_iterator result=*this;
+            ++(*this);
+            return result;
+        }
+        
+        friend bool operator==(const singly_ll_iterator& left, const singly_ll_iterator& right) {
+            return left.ptr==right.ptr;
+        }
+        
+        friend bool operator!=(const singly_ll_iterator& left, const singly_ll_iterator& right) {
+            return left.ptr!=right.ptr;
+        }
     }
 };
+
+singly_ll_iterator begin() { return singly_ll_iterator(head);}
+singly_ll_iterator end() { return singly_ll_iterator(NULL);}
+singly_ll_iterator begin() const { return singly_ll_iterator(head);}
+singly_ll_iterator end() const { return singly_ll_iterator(NULL);}
+
+singly_ll()=default;
+
 
 int main() {
     
