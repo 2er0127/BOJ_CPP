@@ -124,4 +124,53 @@ public:
     cir_list_it end() const{
         return cir_list_it {head->prev};
     }
+    
+    cir_list(const cir_list<T>& other) : cir_list() {
+        for(const auto& i : other)
+            insert(i);
+    }
+    
+    cir_list(const initializer_list<T>& il) : head(NULL), n(0) {
+        for(const auto& i : il)
+            insert(i);
+    }
+    
+    ~cir_list() {
+        while(size()) {
+            erase(*(head->data));
+        }
+        delete head;
+    }
+};
+
+struct playlist {
+    cir_list<int> list;
+    
+    void insert(int song) {
+        list.insert(song);
+    }
+    
+    void erase(int song) {
+        list.erase(song);
+    }
+    
+    void loopOnce() {
+        for(auto& song : list)
+            cout<<song<<" ";
+        cout<<endl;
+    }
+};
+
+int main() {
+    playlist pl;
+    pl.insert(1);
+    pl.insert(2);
+    cout<<"재생 목록 : ";
+    pl.loopOnce();
+    
+    playlist pl2=pl;
+    pl2.erase(2);
+    pl2.insert(3);
+    cout<<"두 번째 재생 목록 : ";
+    pl2.loopOnce();
 }
