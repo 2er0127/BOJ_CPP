@@ -117,6 +117,39 @@ struct game {
         }
         
         unsigned seed=chrono::system_clock::now().time_since_epoch().count();
-        
+        shuffle(player1.begin(), player1.end(), default_random_engine(seed));
+        shuffle(player2.begin(), player2.end(), default_random_engine(seed));
+        shuffle(player3.begin(), player3.end(), default_random_engine(seed));
+        shuffle(player4.begin(), player4.end(), default_random_engine(seed));
     }
+    
+    bool isGameComplete() const {
+        return player1.empty() || player2.empty() || player3.empty() || player4.empty();
+    }
+    
+    void playGame() {
+        while(not isGameComplete()) {
+            playOneRound();
+        }
+    }
+    
+    int getWinner() const {
+        if(player1.empty())
+            return 1;
+        if(player2.empty())
+            return 2;
+        if(player3.empty())
+            return 3;
+        if(player4.empty())
+            return 4;
+    }
+};
+
+int main() {
+    game newGame;
+    newGame.buildDeck();
+    newGame.dealCards();
+    newGame.playGame();
+    auto winner=newGame.getWinner();
+    cout<<winner<<"번 플레이어가 이겼습니다."<<endl;
 }
