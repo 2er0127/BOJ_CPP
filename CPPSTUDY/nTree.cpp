@@ -1,6 +1,8 @@
 // N-항 트리를 이용한 파일 시스템 자료 구조
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -57,6 +59,50 @@ public:
         else {
             return add_impl(cwd, path, is_dir);
         }
+    }
+    
+private:
+    bool add_impl(node_ptr directory, const string& path, bool is_dir) {
+        if(not directory->is_dir) {
+            cout<<directory->name<<"은(는) 파일입니다."<<endl;
+            return false;
+        }
+        
+        auto sep=path.find('/');
+        
+        // path에 '/'가 없는 경우.
+        if(sep==string::npos) {
+            auto found=find_if(directory->children.begin(), directory->children.end(), [&](const node_ptr child) {
+                return child->name==path;
+            });
+            
+            if(found!=directory->children.end()) {
+                cout<<directory->name<<"에 이미 "<<path<<" 이름의 파일/디렉토리가 있습니다."<<endl;
+                return false;
+            }
+            
+            directory->children.push_back(new node {path, is_dir, {}});
+            return true;
+        }
+        
+        // path에 '/'가 있는 경우.
+        string next_dir=path.substr(0, sep);
+        auto found=find_if(directory->children.begin(), directory->children.end(), [&](const node_ptr child) {
+            return child->name==next_dir&&child->is_dir;
+        });
+        
+        if(found!=directory->children.end()) {
+            return add_impl(*found, path.substr(sep+1), is_dir);
+        }
+        
+        // 해당 디렉토리가 없는 경우.
+        cout<<directory->name<<"에 "<<next_dir<<" 이름의 디렉토리가 없습니다."<<endl;
+        return false;
+    }
+    
+public:
+    bool change_dir(const string& path) {
+        auto found=find(path);
     }
 }
 
