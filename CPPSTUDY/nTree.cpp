@@ -103,6 +103,54 @@ private:
 public:
     bool change_dir(const string& path) {
         auto found=find(path);
+        if(found&&found->is_dir) {
+            cwd=found;
+            cout<<"현재 디렉토리를 "<<cwd->name<<"로 이동합니다."<<endl;
+            return true;
+        }
+        
+        cout<<path<<" 경로를 찾을 수 없습니다."<<endl;
+        return false;
     }
-}
+    
+public:
+    void show_path(const string& path) {
+        auto found=find(path);
+        if(not found) {
+            cout<<path<<" 경로가 존재하지 않습니다."<<endl;
+            return;
+        }
+        
+        if(found->is_dir) {
+            for(auto child:found->children) {
+                cout<<(child->is_dir ? "d " : "- ")<<child->name<<endl;
+            }
+        }
+        else {
+            cout<<"- "<<found->name<<endl;
+        }
+    }
+};
 
+int main() {
+    file_system fs;
+    fs.add("usr", true); // "/"에 usr 디렉토리 추가
+    fs.add("etc", true);
+    fs.add("var", true);
+    fs.add("tmp_file", false); // "/"에 tmp_file 파일 추가
+    
+    cout<<"\"/\"의 파일/디렉토리 목록: "<<endl;
+    fs.show_path("/");
+    
+    cout<<endl;
+    fs.change_dir("usr");
+    fs.add("seona", true);
+    fs.add("seona/Downloads", true);
+    fs.add("seona/Downloads/newFile.cpp", false);
+    
+    cout<<"현재 디렉토리에서 usr의 파일/디렉토리 목록: "<<endl;
+    fs.show_path("/usr");
+    
+    cout<<"\"/usr/seona/Downloads\"의 파일/디렉토리 목록"<<endl;
+    fs.show_path("/usr/seona/Downloads");
+}
