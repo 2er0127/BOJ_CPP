@@ -43,4 +43,33 @@ struct median { // 현재까지 받은 데이터를 저장할 컨테이너 정�
         else
             minHeap.push(data);
     }
+    
+    double get() {
+        if(maxHeap.size()==minHeap.size())
+            return (maxHeap.top()+minHeap.top())/2.0;
+            
+        if(maxHeap.size()<minHeap.size())
+            return minHeap.top();
+            
+        return maxHeap.top();
+    }
+};
+
+int main() {
+    median med;
+    
+    med.insert(1);
+    cout<<"1 삽입 후 중앙값: "<<med.get()<<endl;
+    
+    med.insert(5);
+    cout<<"5 삽입 후 중앙값: "<<med.get()<<endl;
+    
+    med.insert(2);
+    cout<<"2 삽입 후 중앙값: "<<med.get()<<endl;
+    
+    med.insert(10);
+    cout<<"10 삽입 후 중앙값: "<<med.get()<<endl;
+    
+    med.insert(40);
+    cout<<"40 삽입 후 중앙값: "<<med.get()<<endl;
 }
