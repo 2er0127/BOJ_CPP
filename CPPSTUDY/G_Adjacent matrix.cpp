@@ -37,4 +37,41 @@ struct graph {
             data.push_back(row);
         }
     }
+    
+    void addEdge(const city c1, const city c2, int dis) {
+        cout<<"에지 추가: "<<c1<<"-"<<c2<<"="<<dis<<endl;
+        
+        auto n1=static_cast<int>(c1);
+        auto n2=static_cast<int>(c2);
+        data[n1][n2]=dis;
+        data[n2][n1]=dis;
+    }
+    
+    void removeEdge(const city c1, const city c2) {
+        cout<<"에지 삭제: "<<c1<<"-"<<c2<<endl;
+        
+        auto n1=static_cast<int>(c1);
+        auto n2=static_cast<int>(c2);
+        data[n1][n2]=-1;
+        data[n2][n1]=-1;
+    }
+};
+
+int main() {
+    graph g(6);
+    g.addEdge(city::LONDON, city::MOSCOW, 2500);
+    g.addEdge(city::LONDON, city::SEOUL, 9000);
+    g.addEdge(city::LONDON, city::DUBAI, 5500);
+    g.addEdge(city::SEOUL, city::MOSCOW, 6600);
+    g.addEdge(city::SEOUL, city::SEATTLE, 8000);
+    g.addEdge(city::SEOUL, city::DUBAI, 7000);
+    g.addEdge(city::SEOUL, city::SYDNEY, 8000);
+    g.addEdge(city::SEATTLE, city::MOSCOW, 8400);
+    g.addEdge(city::SEATTLE, city::SYDNEY, 12000);
+    g.addEdge(city::DUBAI, city::SYDNEY, 1200);
+    
+    g.addEdge(city::SEATTLE, city::LONDON, 8000);
+    g.removeEdge(city::SEATTLE, city::LONDON);
+    
+    return 0;
 }
