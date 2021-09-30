@@ -20,4 +20,43 @@ public:
         data[value%n]=value;
         cout<<value<<"을(를) 삽입했습니다."<<endl; //특정 위치에 이미 다른 값이 존재하더라도 확인 없이 덮어쓴다. 해시 값이 중복된다면 나중에 삽입한 값만 저장된다.
     }
+    
+    //특정 원소가 맵에 있는지 확인한 룩업 함수 추가
+    bool find(uint value) {
+        int n=data.size();
+        return (data[value%n]==value); //해시 값 위치에 저장된 값이 value와 같은지 검사
+    }
+    
+    //삭제 함수 구현
+    void erase(uint value) {
+        int n=data.size();
+        if(data[value%n]==value) {
+            data[value%n]=-1;
+            cout<<value<<"을(를) 삭제했습니다."<<endl;
+        }
+    }
+};
+
+int main() {
+    hash_map map(7);
+    
+    //룩업 결과를 출력하는 람다 함수(lambda function)를 정의
+    auto print=[&](int value) {
+        if(map.find(value))
+            cout<<"해시 맵에서 "<<value<<"을(를) 찾았습니다.";
+        else
+            cout<<"해시 맵에서 "<<value<<"을(를) 찾지 못했습니다.";
+        cout<<endl;
+    };
+    
+    map.insert(2);
+    map.insert(25);
+    map.insert(10);
+    print(25);
+    
+    map.insert(100);
+    print(100);
+    print(2);
+    
+    map.erase(25);
 }
