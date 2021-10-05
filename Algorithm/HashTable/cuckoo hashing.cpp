@@ -54,4 +54,92 @@ public:
             cout<<key<<"키를 찾지 못했습니다."<<endl;
         }
     }
+    
+    //재귀적 동작 삽입 함수. 최대 재귀 호출 횟수는 해시 테이블의 크기와 같게 설정.
+    void insert(int key) {
+        insert_impl(key, 0, 1);
+    }
+    
+    //key는 키, cnt는 재귀 호출 횟수, table은 키를 삽입할 테이블 번호.
+    void insert_impl(int key, int cnt, int table) {
+        if(cnt>=size) {
+            cout<<key<<" 삽입 시 순환 발생. 재해싱이 필요합니다."<<endl;
+            return;
+        }
+        
+        if(table==1) {
+            int hash=hash1(key);
+            if(data1[hash]==-1) {
+                cout<<table<<"번 테이블에 "<<key<<" 삽입"<<endl;
+                data1[hash]=key;
+            }
+            else {
+                int old=data1[hash];
+                data1[hash]=key;
+            }
+            else {
+                int old=data1[hash];
+                data1[hash]=key;
+                cout<<table<<"번 테이블에 "<<key<<" 삽입 : 기존의 "<<old<<" 이동 -> ";
+                insert_impl(old, cnt+1, 2);
+            }
+        }
+        else {
+            int hash=hash2(key);
+            if(data2[hash]==-1) {
+                cout<<table<<"번 테이블에 "<<key<<" 삽입"<<endl;
+                data2[hash]=key;
+            }
+            else {
+                int old=data2[hash];
+                data2[hash]=key;
+                cout<<table<<"번 테이블에 "<<key<<" 삽입 : 기존의 "<<old<<" 이동 -> ";
+                insert_impl(old, cnt+1, 1);
+            }
+        }
+    }
+    
+    //모든 데이터를 출력하는 print() 함수.
+    void print() {
+        cout<<"Index : ";
+        for(int i=0; i<size; i++)
+            cout<<i<<'\t';
+        cout<<endl;
+        
+        cout<<"Data1 : ";
+        for(auto i:data1)
+            cout<<i<<'\t';
+        cout<<endl;
+        
+        cout<<"Data2 : ";
+        for(auto i:data2)
+            cout<<i<<'\t';
+        cout<<endl;
+    }
+};
+
+int main() {
+    hash_map map(7);
+    map.print();
+    cout<<endl;
+    
+    map.insert(10);
+    map.insert(20);
+    map.insert(30);
+    cout<<endl;
+    
+    map.insert(104);
+    map.insert(2);
+    map.insert(70);
+    map.insert(9);
+    map.insert(90);
+    map.insert(2);
+    map.insert(7);
+    cout<<endl;
+    
+    map.print();
+    cout<<endl;
+    
+    //순환 발생.
+    map.insert(14);
 }
