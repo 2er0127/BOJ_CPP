@@ -37,4 +37,33 @@ public:
         cout<<"블룸 필터에 추가: "<<key<<endl;
     }
     
+    bool mayContain(const string* key) {
+        hash(key);
+        for(auto it=&hashValue[0]; it<&hashValue[nHashes]; it++) {
+            if(!bits[*it%bits.size()]) {
+                cout<<key<<" : 사용할 수 있는 이메일입니다."<<endl;
+                return false;
+            }
+        }
+        
+        cout<<key<<" : 이미 사용 중입니다."<<endl;
+        return true;
+    }
+};
+
+int main() {
+    BloomFilter bloom(128, 5);
+    
+    bloom.add("abc@googoo.com");
+    bloom.add("xyz@googoo.com");
+    
+    bloom.mayContain("abc");
+    bloom.mayContain("xyz@googoo.com");
+    bloom.mayContain("xyz");
+    
+    bloom.add("abcd@googoo.com");
+    bloom.add("zzzz@googoo.com");
+    
+    bloom.mayContain("abcd");
+    bloom.mayContain("zzzz@googoo.com");
 }
