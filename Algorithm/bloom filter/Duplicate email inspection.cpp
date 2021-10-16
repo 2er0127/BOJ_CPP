@@ -24,6 +24,8 @@ public:
         }
     }
     
+    //OpenSSL 라이브러리의 MD5 알고리즘을 사용하여 주어진 이메일 주소로부터 해시 값 생성.
+    //MD5:128bits(16bytes) 해싱 알고리즘. 각 바이트를 해시 값으로 사용하여 해시 함수를 대체할 수 있다.
     void hash(const string& key) {
         MD5(reinterpret_cast<const unsigned char*>(key.data()), key.length(), hashValue);
     }
