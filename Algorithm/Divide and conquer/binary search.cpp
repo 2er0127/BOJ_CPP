@@ -30,6 +30,34 @@ bool binary_search(int N, vector<int>& S) {
         //mid_element와 N값을 비교
         if(mid_element==N)
             return true;
+        else if(mid_element>N)
+            advance(last, -mid_element_index);
+        if(mid_element<N)
+            advance(first, mid_element_index);
         
+        //현재 검색 범위에 하나의 원소만 남아 있다면 false를 반환
+        if(range_length==1)
+            return false;
     }
+}
+
+void run_small_search_test() {
+    auto N=2;
+    vector<int> S {1, 3, 2, 4, 5, 7, 9, 8, 6};
+    
+    sort(S.begin(), S.end());
+    
+    if(linear_search(N, S))
+        cout<<"선형 검색으로 원소를 찾았습니다."<<endl;
+    else
+        cout<<"선형 검색으로 원소를 찾지 못했습니다."<<endl;
+    
+    if(binary_search(N, S))
+        cout<<"이진 검색으로 원소를 찾았습니다."<<endl;
+    else
+        cout<<"이진 검색으로 원소를 찾지 못했습니다."<<endl;
+}
+
+void run_large_search_test(int size, int N) {
+    
 }
