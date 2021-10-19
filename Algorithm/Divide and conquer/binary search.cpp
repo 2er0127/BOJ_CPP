@@ -59,5 +59,16 @@ void run_small_search_test() {
 }
 
 void run_large_search_test(int size, int N) {
+    vector<int> S;
+    random_device rd;
+    mt19937 rand(rd());
     
+    //[1, size] 범위에서 정수 난수 발생
+    uniform_int_distribution<mt19937::result_type> uniform_dist(1, size);
+    
+    //S에 난수 추가
+    for(auto i=0; i<size; i++)
+        S.push_back(uniform_dist(rand));
+    
+    sort(S.begin(), S.end());
 }
