@@ -71,4 +71,30 @@ void run_large_search_test(int size, int N) {
         S.push_back(uniform_dist(rand));
     
     sort(S.begin(), S.end());
+    
+    //검색 시간 측정 시작
+    chrono::steady_clock::time_point begin=chrono::steady_clock::now();
+    
+    bool search_result=binary_search(N, S);
+    
+    //검색 시간 측정 종료
+    chrono::steady_clock::time_point end=chrono::steady_clock::now();
+    
+    auto diff=chrono::duration_cast<chrno::microseconds>(end-begin);
+    cout<<"이진 검색 수행 시간 : "<<diff.count()<<endl;
+    
+    if(search_result)
+        cout<<"원소를 찾았습니다."<<endl;
+    else
+        cout<<"원소를 찾지 못했습니다."<<endl;
+}
+
+int main() {
+    run_small_search_test();
+    
+    run_large_search_test(100000, 36543);
+    run_large_search_test(1000000, 36543);
+    run_large_search_test(10000000, 36543);
+    
+    return 0;
 }
