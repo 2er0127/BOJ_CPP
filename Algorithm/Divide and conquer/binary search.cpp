@@ -1,3 +1,7 @@
+//x64-Debug 모드에서 빌드하여 실행
+//이진 검색의 구현과 성능 측정
+
+//헤더파일
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -92,6 +96,7 @@ void run_large_search_test(int size, int N) {
 int main() {
     run_small_search_test();
     
+    //서로 다른 난수 벡터에서 숫자 36543을 찾는 동작을 수행
     run_large_search_test(100000, 36543);
     run_large_search_test(1000000, 36543);
     run_large_search_test(10000000, 36543);
