@@ -32,3 +32,18 @@ public:
         return this->name > p.name;
     }
 };
+
+//1부터 max 사이의 ID를 갖는 임의의 학생 정보를 생성.
+auto generate_random_Student(int max) {
+    random_device rd;
+    mt19937 rand(rd());
+    
+    //학생 ID의 범위는 [1, max]로 지정
+    uniform_int_distribution<mt19937::result_type> uniform_dist(1, max);
+    
+    //임의의 학생 정보 생성
+    auto random_name=make_pair(uniform_dist(rand), uniform_dist(rand));
+    bool is_vaccinated=uniform_dist(rand)%2?true:false;
+    
+    return Student(random_name, is_vaccinated);
+}
