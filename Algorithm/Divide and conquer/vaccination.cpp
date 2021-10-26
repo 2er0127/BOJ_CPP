@@ -47,3 +47,12 @@ auto generate_random_Student(int max) {
     
     return Student(random_name, is_vaccinated);
 }
+
+bool needs_vaccination(Student P, vector<Student>& people) {
+    auto first=people.begin();
+    auto last=people.end();
+    
+    while(true) {
+        
+    }
+}
