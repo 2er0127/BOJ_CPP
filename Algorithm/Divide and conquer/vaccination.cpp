@@ -53,6 +53,27 @@ bool needs_vaccination(Student P, vector<Student>& people) {
     auto last=people.end();
     
     while(true) {
+        auto range_length=distance(first, last);
+        auto mid_element_index=floor(range_length/2);
+        auto mid_element=*(first+mid_element_index);
         
+        //목록에 해당 학생이 있고, 예방 접종을 받지 않은 학생에 대해 true를 반환
+        if(mid_element==P&&mid_element.is_vaccinated()==false)
+            return true;
+        //목록에 해당 학생이 있는데 이미 예방 접종을 받은 학생에 대해 false를 반환
+        else if(mid_element==P&&mid_element.is_vaccinated()==true)
+            return false;
+        else if(mid_element>P)
+            advance(last, -mid_element_index);
+        if(mid_element<P)
+            advance(first, mid_element_index);
+        
+        //목록에 해당 학생이 없다면 true를 반환
+        if(range_length==1)
+            return true;
     }
+}
+
+void search_test(int size, Student P) {
+    
 }
