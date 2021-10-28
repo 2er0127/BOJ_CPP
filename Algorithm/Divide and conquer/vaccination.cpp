@@ -75,5 +75,37 @@ bool needs_vaccination(Student P, vector<Student>& people) {
 }
 
 void search_test(int size, Student P) {
+    vector<Student> people;
     
+    //임의의 학생 정보 목록 생성
+    for(auto i=0; i<size; i++)
+        people.push_back(generate_random_Student(size));
+    
+    sort(people.begin(), people.end());
+    
+    //이진 검색 실행 및 시간 측정
+    auto begin=chrono::steady_clock::now();
+    
+    bool search_result=needs_vaccination(p, people);
+    
+    auto end=chrono::steady_clock::now();
+    auto diff=chrono::duration_cast<chrono::microseconds>(end-begin);
+    
+    cout<<"이진 검색 소요 시간: "<<diff.count()<<"us"<<endl;
+    
+    if(search_result)
+        cout<<"("<<p.get_name().first<<" "<<p.get_name().second<<")"<<"학생은 예방 접종이 필요합니다."<<endl;
+    else
+        cout<<"("<<p.get_name().first<<" "<<p.get_name().second<<")"<<"학생은 예방 접종이 필요하지 않습니다."<<endl;
+}
+
+int main() {
+    //임의의 학생 정보 생성
+    auto p.generate_random_Student(1000);
+    
+    search_test(1000, p);
+    search_test(10000, p);
+    search_test(100000, p);
+    
+    return 0;
 }
