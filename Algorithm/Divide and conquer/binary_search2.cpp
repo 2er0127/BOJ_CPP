@@ -38,3 +38,21 @@ bool binary_search(int N, vector<int>& S) {
             return false;
     }
 }
+
+void run_small_search_test() {
+    auto N=2;
+    vector<int> S {1, 3, 2, 4, 5, 7, 9, 8, 6};
+    
+    sort(S.begin(), S.end());
+    
+    if(linear_search(N, S))
+        cout<<"선형 검색으로 원소를 찾았습니다."<<endl;
+    else
+        cout<<"선형 검색으로 원소를 찾지 못하였습니다."<<endl;
+    
+    if(binary_search(N, S))
+        cout<<"이진 검색으로 원소를 찾았습니다."<<endl;
+    else
+        cout<<"이진 검색으로 원소를 찾지 못하였습니다."<<endl;
+}
+
