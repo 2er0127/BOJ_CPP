@@ -85,3 +85,10 @@ void run_large_search_test(int size, int N) {
         cout<<"원소를 찾지 못하였습니다."<<endl;
 }
 
+int main() {
+    run_small_search_test();
+    
+    run_large_search_test(100000, 36543);
+    run_large_search_test(1000000, 36543);
+    run_large_search_test(10000000, 36543);
+}
