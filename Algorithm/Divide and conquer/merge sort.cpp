@@ -33,3 +33,16 @@ vector<T> merge(vector<T>& arr1, vector<T>& arr2) {
     
     return merged;
 }
+
+template<typename T>
+vector<T> merge_sort(vector<T> arr) {
+    if(arr.size()>1) {
+        auto mid=size_t(arr.size()/2);
+        auto left_half=merge_sort<T>(vector<T>(arr.begin(), arr.begin()+mid));
+        auto right_half=merge_sort<T>(vector<T>(arr.begin()+mid, arr.end()));
+        
+        return merge<T>(left_half, right_half);
+    }
+    
+    return arr;
+}
