@@ -46,3 +46,15 @@ vector<T> merge_sort(vector<T> arr) {
     
     return arr;
 }
+
+template<typename T>
+void print_vector(vector<T> arr) {
+    for(auto i:arr)
+        cout<<i<<" ";
+    
+    cout<<endl;
+}
+
+void run_merge_sort_test() {
+    
+}
