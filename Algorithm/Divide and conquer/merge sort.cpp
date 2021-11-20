@@ -56,5 +56,32 @@ void print_vector(vector<T> arr) {
 }
 
 void run_merge_sort_test() {
+    vector<int> S1 {45, 1, 3, 1, 2, 3, 45, 5, 1, 2, 44, 5, 7};
+    vector<float> S2 {45.6f, 1.0f, 3.8f, 1.01f, 2.2f, 3.9f, 45.3f, 5.5f, 1.0f, 2.0f, 44.0f, 5.0f, 7.0f};
+    vector<double> S3 {45.6, 1.0, 3.8, 1.01, 2.2, 3.9, 45.3, 5.5, 1.0, 2.0, 44.0, 5.0, 7.0};
+    vector<char> C {'b', 'z', 'a', 'e', 'f', 't', 'q', 'u', 'y'};
     
+    cout<<"정렬되지 않은 입력 벡터 : "<<endl;
+    print_vector<int>(S1);
+    print_vector<float>(S2);
+    print_vector<double>(S3);
+    print_vector<char>(C);
+    cout<<endl;
+    
+    auto sorted_S1=merge_sort<int>(S1);
+    auto sorted_S2=merge_sort<float>(S2);
+    auto sorted_S3=merge_sort<double>(S3);
+    auto sorted_C=merge_sort<char>(C);
+    
+    cout<<"병합 정력에 의해 정렬된 벡터 : "<<endl;
+    print_vector<int>(sorted_S1);
+    print_vector<float>(sorted_S2);
+    print_vector<double>(sorted_S3);
+    print_vector<char>(sorted_C);
+    cout<<endl;
+}
+
+int main() {
+    run_merge_sort_test();
+    return 0;
 }
